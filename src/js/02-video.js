@@ -2,9 +2,9 @@ import Vimeo from '@vimeo/player';
 
 import throttle from 'lodash.throttle';
 
-const localKey = 'videoplayer-current-time';
 const iframe = document.querySelector('#iframe');
-const player = new Vimeo(iframe);
+const localKey = 'videoplayer-current-time';
+const player = new Vimeo.Player(iframe);
 
 player.on('timeupdate', throttle(onPlay, 1000));
 
@@ -16,8 +16,8 @@ const timeupdate = () => {
   const currentTime = localStorage.getItem(localKey);
   if (currentTime) {
     const timeJson = JSON.parse(currentTime);
-    const { second } = timeJson;
-    return second;
+    const { seconds } = timeJson;
+    return seconds;
   }
 };
 player
